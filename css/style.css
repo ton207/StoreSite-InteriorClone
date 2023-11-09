@@ -1,0 +1,378 @@
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    全体 / 共通クラス
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+html {
+  font-size: 100%;
+}
+/*フッターを画面下に配置するために、position:relativeを設定min-heightで最小の高さを画面の高さにあわせる*/
+body {
+  color: #333;
+  /* 14px */
+  font-size: 0.875rem;
+  min-height: 100vh;
+  position: relative;
+}
+a {
+  color: #333;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+a:hover {
+  opacity: 0.7;
+}
+img {
+  max-width: 100%;
+}
+li {
+  list-style: none;
+}
+/*コンテンツ幅を設定するための共通クラス*/
+.wrapper {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.content {
+  padding-top: 120px;
+  padding-bottom: 160px;
+}
+.site-title a {
+  width: 180px;
+  line-height: 1px;
+  display: block;
+}
+.page-title {
+  font-size: 0.875rem;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+  
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  header
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+/* position:fixedでヘッダーを固定し、z-index:10;で前面に表示。
+※他のコンテンツでpositionをrelative,absolute,fixedのいずれかに設定している場合は、z-indexの数値が大きい方が前面に表示される。 */
+#header {
+width: 100%;
+height: 80px;
+background-color: #fff;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: flexed;
+left: 0;
+right: 0;
+z-index: 10;
+}
+
+/* ーーーーーーーーーーーー
+  ハンバーガーメニュー
+ーーーーーーーーーーーーー */
+/* ハンバーガーメニューが閉じている時。left:-300px;で画面左に隠し、opacity:0で非表示にしている */
+#navi {
+position: fixed;
+top: 0;
+left: -300px;
+width: 300px;
+color: #fff;
+padding: 36px 50px;
+transition: all 0.5s;
+z-index: 20;
+opacity: 0;
+}
+#navi a {
+color: #fff;
+}
+#navi li {
+margin-bottom: 14px;
+}
+
+/* ハンバーガーメニューが開いている時。left:0; opacity:1で、画面左に表示 */
+.open #navi {
+  left: 0;
+  opacity: 1;
+}
+/* トグルボタン */
+.toggle_btn {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  transform: all 0.5s;
+  cursor: pointer;
+  z-index: 20;
+}
+
+/* ハンバーガーメニューの線の設定（close メニューが閉じている時） */
+.toggle_btn span{
+  display: block;
+  position: absolute;
+  /* 線の長さ */
+  width: 30px;
+  /* 線の太さ */
+  height: 2px;
+  /* 線の色 */
+  background-color: #333;
+  /* 線の両端の丸み */
+  border-radius: 4px;
+  transition: all 0.5s;
+}
+
+/* 1本目の線の位置を設定 */
+.toggle_btn span:nth-child(1) {
+  top: 10px;
+}
+/* 2本目の線の位置を設定 */
+.toggle_btn span:nth-child(1) {
+  bottom: 10px;
+}
+
+/* ハンバーガーメニューの線の設定（open メニューが開いている時） */
+.open .toggle_btn span {
+  background-color: #fff;
+}
+
+/* ハンバーガーメニューを×マークに変える　
+　　1本目の線を-45度回転 */
+.open .toggle_btn span:nth-child(1) {
+  top: 0;
+    transform: rotate(45deg);
+}
+/* 2本目の線を45度回転 */
+.open .toggle_btn span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+#mask {
+  display: none;
+  transition: all 0.5s;
+}
+
+/* メニューを開いている時は、全体を黒背景にする */
+.open #mask {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: .8;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    TOP、PRODUCTS
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+/* ulを囲うdivタグ */
+#top {
+  padding-top: 80px;
+  padding-bottom: 160px;
+}
+/* ul リストを横並び.折り返し.両端揃えにする */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+/* 横に並べた各リストの横幅を指定 */
+.product-list li {
+  width: 23%;
+  margin-bottom: 40px;
+}
+/* 画像の下に隙間ができないようにする */
+.product-list img {
+  margin-bottom: 10px;
+  vertical-align: top;
+}
+/* 12px */
+.product-list p {
+  font-size: 0.75rem;
+}
+/* aタグ */
+.link-text {
+  display: block;
+  text-align: center;
+}
+/* ページネーション 中身はリスト */
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+.pagination li {
+  padding: 0 20px;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    ITEM
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+/* imgとテキストを横並び両端揃えにする */
+#item {
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+#item .item-img {
+  width: 50%;
+} 
+#item .item-text {
+  width: 42%;
+}
+
+/* 和文の両端揃え */
+#item .item-text p {
+  margin-bottom: 30px;
+  text-align: justify;
+}
+/* dtとddを横並び折り返し */
+#item .item-text dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+#item .item-text dt{
+  width: 30%;
+
+}
+#item .item-text dd {
+  width: 70%;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    ABOUT
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+#about {
+  max-width: 600px;
+}
+#about p {
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    COMPANY
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+#company {
+  max-width: 600px;
+}
+#company dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+#company dt {
+  width: 30%;
+  border-bottom: solid 1px #dcdbdb;
+  padding: 20px 10px;
+}
+#company dt:last-of-type {
+  border-bottom: none;
+}
+#company dd {
+  width: 70%;
+  border-bottom: solid 1px #dcdbdb;
+  padding: 20px 10px;
+}
+#company dd:last-of-type {
+  border-bottom: none;
+}
+/* グーグルマップをグレースケールにする */
+#company .map {
+  filter: grayscale(1);
+}
+/* グーグルマップのサイズを設定 */
+#company .map iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    FOOTER
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+/* position:absoluteを設定して、フッター位置を画面下に設定 left:0 right:0で中央に配置 */
+/* ulとpを横並びの両端揃えに配置 */
+#footer {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+/* リストを横並びに配置 */
+#footer .menu {
+  display: flex;
+}
+/* リスト同士の横間隔を空けるために右余白を設定　0.75rem＝12px */
+#footer .menu li {
+  font-size: 0.75rem;
+  margin-right: 30px;
+}
+/* コピーライト　0.625rem=10px */
+#footer .copyright {
+  font-size: 0.625rem;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    sp　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */
+
+@media screen and (max-width: 900px) {
+  /* ーーーーーーーーーーーーーーーーーー
+     TOP、PRODUCTS　　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　
+  ーーーーーーーーーーーーーーーーーーー */
+  .product-list li {
+    width: 47%;
+  }
+  /* ーーーーーーーーーーーーーーーーーー
+     Item　　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦
+  ーーーーーーーーーーーーーーーーーーー */
+  /* item-imgとitem-textを縦並びにし、横幅いっぱいに拡げる */
+  #item {
+    flex-direction: column;
+  }
+  #item-img {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  #item-text {
+    width: 100%;
+  }
+  /* ーーーーーーーーーーーーーーーーーー
+     COMPANY　　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦
+  ーーーーーーーーーーーーーーーーーーー */
+  /* 項目（dt）とテキスト（dd）を縦並びにし、横幅いっぱいに拡げる。*/
+  #company ul {
+    flex-direction: column;
+  }
+  /* 縦並びにするので項目（dt）の下の下線は外す。p-dで行間余白を設定 */
+  #company dt {
+    width: 100%;
+    border-bottom: none;
+    padding-bottom: 5px;
+  }
+  #company dd {
+    width: 100%;
+  }
+  /* ーーーーーーーーーーーーーーーーーー
+     FOOTER　　♦︎　♦︎　♦︎　♦︎　♦︎　♦︎　♦
+  ーーーーーーーーーーーーーーーーーーー */
+  /* ul.menuとpを縦並びに。 */
+  #footer {
+    flex-direction: column;
+  }
+  /* ul.menuとpの間に余白を設定 */
+  .menu {
+    margin-bottom: 5px;
+  }
+
+
+}
